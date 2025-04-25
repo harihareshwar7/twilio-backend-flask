@@ -1,7 +1,9 @@
 from flask import Flask, request, Response
 from twilio.twiml.voice_response import VoiceResponse, Gather
 import requests
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
 app = Flask(__name__)
 
 @app.route("/voice", methods=['POST'])
@@ -39,4 +41,4 @@ def handle_keypress():
     return Response(str(response), mimetype='text/xml')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True,port=os.environ.get('PORT', 8080))
